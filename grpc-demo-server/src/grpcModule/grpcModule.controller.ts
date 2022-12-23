@@ -26,7 +26,8 @@ export class GRpcController {
    */
   @GrpcMethod('AppController', 'Accumulate')
   accumulate(numberArray: INumberArray, metadata: any): ISumOfNumberArray {
+    // console.log({numberArray});
+  
     return { sum: this.grpcServices.accumulate(numberArray.data) };
   }
-
 }

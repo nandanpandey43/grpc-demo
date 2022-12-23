@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
 // }
 export interface IGrpcService {
   accumulate(numberArray: any): Observable<any>;
-  greeting(messageToGreet: GreetData): Observable<any>;
+  greeting(greetingName: GreetData): Observable<any>;
 }
 export interface IGrpcServiceGreeting {
-  greeting(messageToGreet: GreetData): Observable<any>;
+  greeting(greetingName: GreetData): Observable<any>;
 }
 
 interface INumberArray {
