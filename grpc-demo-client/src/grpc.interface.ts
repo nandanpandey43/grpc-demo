@@ -20,5 +20,5 @@ interface INumberArray {
 // }
 
 interface GreetData {
-  data: string;
+  name: string;
 }

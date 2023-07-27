@@ -6,6 +6,7 @@ import {
   OnModuleInit,
   Get,
   Param,
+  Query
 } from '@nestjs/common';
 import { IGrpcService, IGrpcServiceGreeting } from './grpc.interface';
 import { Client, ClientGrpc } from '@nestjs/microservices';
@@ -16,7 +17,7 @@ interface IGetParams {
   name: string;
 }
 
-let data : number[] = [11,22,33,44]
+let randomData : number[] = [11,22,33,44]
 
 @Controller()
 export class AppController implements OnModuleInit {
@@ -43,18 +44,23 @@ export class AppController implements OnModuleInit {
     return { 'msg ': 'hello' };
   }
 
-  @Get('add')
-  async add(@Body('data') data1: number[]) {
+  @Post('add')
+  async add(@Body('data') data: number[]) {
     return (data || []).reduce((a, b) => Number(a) + Number(b));
   }
 
-  @Get('grpc-add')
-  async accumulate(@Body('data') data1: number[]) {
+  @Post('grpc-add')
+  async accumulate(@Body('data') data: number[]) {
     return this.grpcService.accumulate({data});
   }
 
-  @Get('rest-add')
-  async restAdd(@Body('data') data1: number[]) {
+  @Post('rest-add')
+  async restAdd(@Body('data') data: number[]) {
     return this.appService.restAdd(data);
+  }
+
+  @Get('grpc-greet')
+  async greet(@Query('name') name: string) {
+    return this.grpcService.greeting({name});
   }
 }

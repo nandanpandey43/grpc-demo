@@ -19,8 +19,8 @@ export class AppController {
    * rest route to add
    */
   @Get('rest-add')
-  add(@Body() data: any): number {
+  add(@Body() data: any): object {
     // console.log("get rest add", data);
-    return (data || []).reduce((a, b) => Number(a) + Number(b));
+    return {sum: (data || []).reduce((a, b) => Number(a) + Number(b))};
   }
 }

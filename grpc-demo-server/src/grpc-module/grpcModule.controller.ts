@@ -7,7 +7,7 @@ interface INumberArray {
   data: number[];
 }
 interface IGreetMessage {
-  data: string;
+  name: string;
 }
 interface ISumOfNumberArray {
   sum: number;
@@ -25,9 +25,15 @@ export class GRpcController {
    * grpc route to add
    */
   @GrpcMethod('AppController', 'Accumulate')
-  accumulate(numberArray: INumberArray, metadata: any): ISumOfNumberArray {
-    // console.log({numberArray});
-  
+  accumulate(numberArray: INumberArray, metadata: any): ISumOfNumberArray {  
     return { sum: this.grpcServices.accumulate(numberArray.data) };
+  }
+
+  /**
+   * grpc route to greet
+   */
+  @GrpcMethod('AppController', 'Greeting')
+  greet(data: IGreetMessage, metadata: any): object {  
+    return { message : this.grpcServices.greeting(data.name) };
   }
 }
